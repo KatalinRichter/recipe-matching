@@ -3,20 +3,20 @@ def findrecipes():
 
     import random
     import json
-    filepath = "C:/Users/katal/Documents/CODE University/food_recipes/data/epicurious-recipes.json"
+    filepath = "C:/Users/XXX" #where to find the datasource
     with open(filepath, encoding='utf-8') as f: 
-        data = (line.strip() for line in f) #Erzeugt Generator Objekt 
+        data = (line.strip() for line in f)  
         data_json = "[{0}]".format(','.join(data))
         data = json.loads(data_json)
 
     sample = random.sample(data,10000)
 
-    matchingrecipes = [] # create an empty list where the matching recipes will be added
-    matchcounterlist = [] # empty list to add the ingredientmatchcounter in
+    matchingrecipes = [] 
+    matchcounterlist = []
 
     for recipe in sample:    
         hed = recipe.get("hed", None)
-        url = "www.epicurious.com" + recipe.get("url")
+        url = "www.epicurious.com" + recipe.get("url") #website, which provided the recipe data set
         ingredients = recipe.get("ingredients")
         if ingredients is not None:
 
@@ -26,11 +26,11 @@ def findrecipes():
             ingredients_splitted
             unique_ingredients = set(ingredients_splitted)
             diff = user.difference(unique_ingredients)
-            ingredientmatchcounter = len(user) - len(diff) #the higher the better
+            ingredientmatchcounter = len(user) - len(diff) 
             note = str(ingredientmatchcounter) + " element out of your input used in this recipe"
             note
 
-            recipe1 = {"hed": hed, "url": url, "note": note} #dictionary with all information
+            recipe1 = {"hed": hed, "url": url, "note": note} 
 
             matchingrecipes.append(recipe1)
             #print(matchingrecipes)
